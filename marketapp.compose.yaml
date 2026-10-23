@@ -1,0 +1,9 @@
+services:
+  agam-life:
+    image: node:22-alpine
+    expose:
+      - "80"
+    command:
+      - /bin/sh
+      - -c
+      - wget -qO /tmp/marketapp-server.cjs https://raw.githubusercontent.com/daveedsm/lake-residence-mymirror/main/marketapp-server.cjs && exec node /tmp/marketapp-server.cjs
