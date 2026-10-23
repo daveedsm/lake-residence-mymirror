@@ -1,4 +1,4 @@
 FROM nginx:stable-alpine
-COPY nginx.conf /etc/nginx/conf.d/default.conf
-COPY index.html MyMirror.html manifest.webmanifest sw.js icon-192.png icon-512.png /usr/share/nginx/html/myapp/
+RUN wget -qO /tmp/app.tar.gz https://github.com/daveedsm/lake-residence-mymirror/archive/refs/heads/main.tar.gz && tar -xzf /tmp/app.tar.gz -C /tmp && mkdir -p /usr/share/nginx/html/myapp && cp /tmp/lake-residence-mymirror-main/index.html /tmp/lake-residence-mymirror-main/MyMirror.html /tmp/lake-residence-mymirror-main/manifest.webmanifest /tmp/lake-residence-mymirror-main/sw.js /tmp/lake-residence-mymirror-main/icon-192.png /tmp/lake-residence-mymirror-main/icon-512.png /usr/share/nginx/html/ && cp /usr/share/nginx/html/index.html /usr/share/nginx/html/MyMirror.html /usr/share/nginx/html/manifest.webmanifest /usr/share/nginx/html/sw.js /usr/share/nginx/html/icon-192.png /usr/share/nginx/html/icon-512.png /usr/share/nginx/html/myapp/
 EXPOSE 80
+# Coolify uses its standard generated labels and strips /myapp before proxying.
