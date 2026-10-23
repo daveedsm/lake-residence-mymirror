@@ -1,9 +1,12 @@
 services:
-  agam-life:
+  market-app:
     image: node:22-alpine
+    environment:
+      MARKET_APP_ONLY: "1"
     expose:
       - "80"
     command:
       - /bin/sh
       - -c
       - wget -qO /tmp/marketapp-server.cjs https://raw.githubusercontent.com/daveedsm/lake-residence-mymirror/main/marketapp-server.cjs && exec node /tmp/marketapp-server.cjs
+# Deploy as a SEPARATE service routed only at /marketapp. Do not replace the main website service.
