@@ -1,6 +1,6 @@
 # MyMirror — simpler home and configurable services
 
-Phone key and Garage door are the first two controls on Home and Services. Home keeps the existing apartment photo and custom shortcuts, groups the remaining services into three expandable sections, and folds income, stays and the illustrative chart into My apartment. The full Services directory opens all three groups.
+Phone key and Garage door are the first two controls on Home and Services. Home restores the welcome screen, residence name and Rename residence control, keeps the apartment photo and custom shortcuts, and shows every original and added service icon in a visible grid. No service icons are hidden behind collapsed groups on Home. Income, stays and the illustrative chart remain in a compact My apartment section. The Services directory also retains the grouped view.
 
 Gym, Pool, Spa, Personal trainer, Rooftop, Shops, Maintenance, Room service, Concierge, Housekeeping and Things to do remain available. Hardware access stays honestly marked as not connected until a real lock/gate integration is provided. No resident storage keys were changed or cleared.
 
