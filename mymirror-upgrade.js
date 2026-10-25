@@ -21,7 +21,7 @@ const prevRender=render;render=function(){
  }
  if(state.page==='services'){const grid=document.querySelector('#content .grid3');if(grid){grid.classList.add('mm-grouped');grid.innerHTML='<div class="mm-home-grid">'+services.filter(s=>s[0]!=='concierge').map(tile).join('')+'</div>';}}
  if(state.page==='settings'&&!document.getElementById('mm-owner-admin'))document.getElementById('content').insertAdjacentHTML('beforeend','<div class="card mm-owner-card" hidden><h2>'+L('For management','להנהלה')+'</h2><p>'+L('Manage services, stores and rooftop reservations.','ניהול שירותים, חנויות והזמנות לגג.')+'</p><button id="mm-owner-admin" data-mm-manage class="secondary">'+L('Admin settings','הגדרות מנהל')+' ↗</button></div>');
- const ownerCard=document.querySelector('.mm-owner-card');if(ownerCard)fetch(api+'/admin/status',{cache:'no-store'}).then(r=>r.json()).then(s=>{ownerCard.hidden=!s.authenticated;}).catch(()=>{});
+ const ownerCard=document.querySelector('.mm-owner-card');if(ownerCard)fetch(api+'/admin/status',{cache:'no-store'}).then(r=>r.json()).then(s=>{ownerCard.hidden=!(s.authenticated&&s.role==='owner');}).catch(()=>{});
   if(typeof localize==='function')localize();
 };
 const style=document.createElement('style');style.textContent=`
@@ -165,5 +165,33 @@ body:not(.crm-mode) main>header .top-actions{direction:ltr;margin-left:auto;marg
 .mm-resident-name:focus-visible,.mm-person-name:focus-visible{outline:2px solid var(--blue);outline-offset:5px;border-radius:3px}
 `;document.head.appendChild(residentStyle);
 const residentLocalize=localize;localize=function(root=document.body){residentLocalize(root);const toggle=document.getElementById('language-toggle');if(toggle){toggle.textContent=language==='he'?'EN':'עב';toggle.setAttribute('aria-label',language==='he'?'Switch to English':'מעבר לעברית');toggle.setAttribute('lang',language==='he'?'en':'he');}};
+
+// Profile uses the same header as Home; account controls live below it.
+const cleanProfileStyle=document.createElement('style');cleanProfileStyle.textContent=`
+.mm-owner-card[hidden]{display:none!important}
+@media(max-width:900px){body:not(.crm-mode) main>header,html[dir=rtl] body:not(.crm-mode) main>header{direction:ltr;padding:0;min-height:40px;margin-bottom:14px;align-items:center;flex-wrap:nowrap;gap:8px}body:not(.crm-mode) main>header .mobile-brand{display:flex;align-items:center;white-space:nowrap;font-size:19px}body:not(.crm-mode) main>header .top-actions{margin-top:0;margin-left:auto}body:not(.crm-mode) main>header .round{width:31px;height:31px}body:not(.crm-mode) main>header .badge{display:none}}
+body:not(.crm-mode) main>header .top-actions{flex-wrap:nowrap;gap:8px}
+.mm-profile-card{direction:ltr;display:flex;align-items:center;gap:14px;padding:20px}
+.mm-profile-card .mm-profile-details{flex:1;min-width:0;text-align:start;direction:inherit}
+html[dir=rtl] .mm-profile-details{direction:rtl}
+.mm-profile-card .mm-profile-details button{font:inherit;font-size:19px;font-weight:500;text-align:start;padding:0;border:0;background:none;color:var(--text)}
+.mm-profile-card .owner-profile-button{position:relative;display:grid;place-items:center;flex:0 0 68px;width:68px;height:68px;border-radius:50%;border:1px solid var(--line);background:var(--panel2);padding:0;overflow:visible}
+.mm-profile-card .owner-profile-button img{width:100%;height:100%;object-fit:cover;border-radius:50%}
+.mm-profile-card .owner-profile-button svg{width:29px;height:29px}
+.mm-profile-card .profile-plus{position:absolute;right:-2px;bottom:0;width:22px;height:22px;display:grid;place-items:center;border-radius:50%;background:var(--panel);border:1px solid var(--line);font-size:16px}
+.mm-profile-card>[data-mm-signin],.mm-profile-card>[data-mm-signout],.mm-profile-card>[data-mm-resident-logout]{margin-left:auto;white-space:nowrap}
+@media(max-width:600px){.mm-profile-card{gap:12px;padding:18px 14px}.mm-profile-card .mm-profile-details button{font-size:17px}}
+`;document.head.appendChild(cleanProfileStyle);
+const cleanProfileRender=render;render=function(){
+ cleanProfileRender();if(state.crm)return;
+ document.querySelector('main>header #owner-profile-photo')?.remove();
+ if(state.page!=='settings')return;
+ const content=document.getElementById('content');content.querySelector('.page-header')?.remove();
+ const card=content.querySelector('.mm-profile-card');if(!card)return;
+ const auth=card.querySelector('[data-mm-signin],[data-mm-signout],[data-mm-resident-logout]');
+ card.innerHTML='<button class="owner-profile-button" id="owner-profile-photo" aria-label="'+L('Change profile photo','שינוי תמונת פרופיל')+'">'+(state.ownerPhoto?'<img src="'+safe(state.ownerPhoto)+'" alt="'+L('Your profile photo','תמונת הפרופיל שלכם')+'">':icon('settings'))+'<span class="profile-plus">+</span></button><div class="mm-profile-details"><button data-mm-profile-name data-user-content>'+safe(profileName||L('Your name','השם שלכם'))+'</button></div>';
+ if(auth)card.append(auth);
+};
+
 render();
 })();
