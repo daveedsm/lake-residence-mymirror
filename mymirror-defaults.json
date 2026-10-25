@@ -29,6 +29,55 @@
       "title": "Things to do",
       "provider": "",
       "url": ""
+    },
+    "garage": {
+      "title": "Garage access",
+      "titleHe": "כניסה לחניה",
+      "provider": "",
+      "url": "",
+      "group": "home"
+    },
+    "key": {
+      "title": "Phone key",
+      "titleHe": "מפתח בטלפון",
+      "provider": "",
+      "url": "",
+      "group": "home"
+    },
+    "food": {
+      "title": "Room service / Concierge",
+      "titleHe": "שירות חדרים / קונסיירז׳",
+      "provider": "",
+      "url": "",
+      "group": "home"
+    },
+    "clean": {
+      "title": "Housekeeping",
+      "titleHe": "משק בית",
+      "provider": "",
+      "url": "",
+      "group": "home"
+    },
+    "maintenance": {
+      "title": "Maintenance",
+      "titleHe": "תחזוקה",
+      "provider": "",
+      "url": "",
+      "group": "home"
+    },
+    "rooftop": {
+      "title": "Rooftop",
+      "titleHe": "גג הדיירים",
+      "provider": "",
+      "url": "",
+      "group": "home"
+    },
+    "shops": {
+      "title": "Shops",
+      "titleHe": "חנויות",
+      "provider": "",
+      "url": "",
+      "group": "home"
     }
   },
   "shops": [
