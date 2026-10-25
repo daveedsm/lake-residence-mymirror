@@ -30,3 +30,7 @@ Three existing apartment photos were moved from embedded base64 strings to share
 6. Verify HTTPS, admin login, persistent writes, live calendar, images, installation and restored resident data before switching public traffic.
 
 This branch is not deployed to the new Hetzner server. Server installation/access is still pending. No Google Play release has been created. Browser-local resident data is not automatically migrated by moving server files; export/import or explicit synchronization is still required for cross-device migration.
+
+## Latest layout revision
+
+Home now starts with the apartment picture, followed by its name/rename control and the customizable shortcut strip (up to five shortcuts plus the edit button). Phone key and Garage access remain available in the strip. All twelve service icons appear as compact original-icon tiles in a four-column, three-row grid. Concierge is merged into Room service; old concierge actions route to Room service. No category banners appear on Home or Services. The active navigation stripe is removed.
