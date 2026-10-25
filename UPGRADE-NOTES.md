@@ -34,3 +34,5 @@ This branch is not deployed to the new Hetzner server. Server installation/acces
 ## Latest layout revision
 
 Home now starts with the apartment picture, followed by its name/rename control and the customizable shortcut strip (up to five shortcuts plus the edit button). Phone key and Garage access remain available in the strip. All twelve service icons appear as compact original-icon tiles in a four-column, three-row grid. Concierge is merged into Room service; old concierge actions route to Room service. No category banners appear on Home or Services. The active navigation stripe is removed.
+
+Latest visual preview: four smaller round service icons per row; Garage, Phone key and Room service / Concierge first, Pool/Gym/Trainer together, Maintenance before Shops. Shortcut picker now displays a live count, prevents selecting a sixth item, and enables saving one through five selections. Profile display name is local-only; resident sign-in/sign-up remain explicitly unavailable until a real resident account service is connected.
