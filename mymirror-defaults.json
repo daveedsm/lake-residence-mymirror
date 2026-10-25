@@ -46,6 +46,10 @@
     "instructions": "Request time for a resident gathering or activity. Management reviews each request before confirmation.",
     "maxGuests": 30,
     "startHour": 8,
-    "endHour": 22
+    "endHour": 22,
+    "maxDurationHours": 8,
+    "advanceDays": 180,
+    "blockedDates": [],
+    "instructionsHe": "בחרו זמן למפגש או לפעילות. ההזמנה ממתינה לאישור ההנהלה."
   }
 }
