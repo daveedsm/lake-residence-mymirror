@@ -13,7 +13,7 @@ const prevRender=render;render=function(){
  prevRender();if(state.crm)return;
  if(state.page==='home'){
   const content=document.getElementById('content');content.classList.add('mm-calm-home');
-  const hero=content.querySelector('.hero');if(hero)hero.insertAdjacentHTML('afterend','<div class="mm-residence-line"><span data-user-content>'+safe(unitName(u()))+'</span><button class="text-button" id="rename-home">✎ '+L('Rename residence','שינוי שם הדירה')+'</button></div>');
+  const hero=content.querySelector('.hero');if(hero)hero.insertAdjacentHTML('afterend','<div class="mm-residence-line"><button class="mm-resident-name" id="rename-home" data-user-content aria-label="'+L('Rename resident','שינוי שם הדייר')+'">'+safe(unitName(u()))+'</button></div>');
   const controls=content.querySelector('.controls');if(controls){controls.classList.add('mm-grouped');controls.innerHTML='<div class="mm-home-grid">'+services.filter(s=>s[0]!=='concierge').map(tile).join('')+'</div>';}
   const quick=content.querySelector('.quickbar');if(quick){const shortcuts=[...new Set(state.shortcuts.map(k=>k==='concierge'?'food':k))].slice(0,4);quick.innerHTML=shortcuts.map(k=>services.find(s=>s[0]===k)).filter(Boolean).map(s=>'<button class="quick" data-service="'+s[0]+'"><span class="sculpt">'+icon(s[0])+'</span><span>'+s[1]+'</span></button>').join('');}
   const side=content.querySelector('.side-column');if(side)side.remove();
@@ -124,5 +124,14 @@ const clearStyle=document.createElement('style');clearStyle.textContent=`
 /* Service cards distinguish the lower grid from transparent pinned shortcuts. */
 .mm-home-grid{align-items:stretch;gap:14px;max-width:720px}.mm-home-grid .tile{width:100%;max-width:none;min-height:112px;padding:19px 9px 15px;border:1px solid var(--line);border-radius:16px;background:var(--panel);box-shadow:0 2px 8px #00000006;justify-content:center;transition:background .15s,border-color .15s,transform .15s}.mm-home-grid .tile:hover{background:var(--panel2);border-color:var(--muted);transform:translateY(-2px)}.mm-home-grid .tile .sculpt,.mm-home-grid .tile:hover .sculpt{background:transparent;border:0;border-radius:0;box-shadow:none;margin-bottom:9px}.mm-home-grid .tile b{font-size:12px;line-height:1.4}.mm-calm-home .quickbar .quick,.mm-calm-home .quickbar .quick .sculpt{background:transparent;border:0;box-shadow:none}@media(max-width:600px){.mm-home-grid{gap:9px}.mm-home-grid .tile{min-height:94px;padding:13px 4px 10px;border-radius:13px}.mm-home-grid .tile b{font-size:10px}.mm-home-grid .tile:hover{transform:none}}@media(prefers-reduced-motion:reduce){.mm-home-grid .tile{transition:none}}
 `;document.head.appendChild(clearStyle);
+// Keep language controls in the same physical position for English and Hebrew.
+const residentStyle=document.createElement('style');residentStyle.textContent=`
+body:not(.crm-mode) main>header{direction:ltr}
+body:not(.crm-mode) main>header .top-actions{direction:ltr;margin-left:auto;margin-right:0}
+#language-toggle{order:10;width:42px;min-width:42px;text-align:center}
+.mm-resident-name{appearance:none;border:0;background:transparent;color:inherit;font:inherit;font-weight:500;padding:0;text-align:start;cursor:pointer}
+.mm-resident-name:focus-visible{outline:2px solid var(--blue);outline-offset:5px;border-radius:3px}
+`;document.head.appendChild(residentStyle);
+const residentLocalize=localize;localize=function(root=document.body){residentLocalize(root);const toggle=document.getElementById('language-toggle');if(toggle){toggle.textContent=language==='he'?'EN':'עב';toggle.setAttribute('aria-label',language==='he'?'Switch to English':'מעבר לעברית');toggle.setAttribute('lang',language==='he'?'en':'he');}};
 render();
 })();
