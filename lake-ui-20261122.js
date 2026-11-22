@@ -183,7 +183,7 @@ html[dir] body.lake-mirror-app .mm-home-grid{margin-top:8px!important}
 @media(max-width:650px){html[dir] body.lake-mirror-app main{padding-top:12px!important}html[dir] body.lake-mirror-app main>header{min-height:54px!important;height:54px!important;margin-bottom:8px!important}}
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
 `;
-new MutationObserver(()=>{document.body.classList.add(stay?'lake-stay-app':'lake-mirror-app');}).observe(document.body,{attributes:true,attributeFilter:['class']});
+new MutationObserver(()=>{const c=stay?'lake-stay-app':'lake-mirror-app';if(!document.body.classList.contains(c))document.body.classList.add(c);}).observe(document.body,{attributes:true,attributeFilter:['class']});
 document.addEventListener('click',e=>{if(e.target.closest('#language-toggle,.guest-app-language')){const x=window.scrollX,y=window.scrollY;const restore=()=>window.scrollTo({left:x,top:y,behavior:'instant'});queueMicrotask(restore);requestAnimationFrame(restore);}},true);
 const style=document.createElement('style');style.id='lake-ui-20261122';style.textContent=css;document.head.append(style);
 refresh();new MutationObserver(()=>{if(!queued){queued=true;requestAnimationFrame(()=>{queued=false;refresh();});}}).observe(document.body,{childList:true,subtree:true,characterData:true});setInterval(theme,60000);document.addEventListener('visibilitychange',()=>{if(!document.hidden)theme();});window.addEventListener('pageshow',theme);
