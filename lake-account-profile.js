@@ -5,7 +5,7 @@ let account={ready:false,guest:null,resident:null,admin:false},queued=false;
 const owner=()=>!!account.resident?.authenticated||account.admin||['owner','admin'].includes(account.guest?.user?.role)||['owner','admin'].includes(account.guest?.profile?.role);
 const signed=()=>owner()||!!account.guest?.user;
 const photoKey=()=> 'lake-profile-photo-v1-'+(account.resident?.owner?.id||account.guest?.user?.id||'device');
-const imageForProfile=()=>{try{return localStorage.getItem(photoKey())||document.querySelector('.owner-profile-button img,#owner-profile-photo img')?.src||'';}catch{return '';}};
+const imageForProfile=()=>{try{return localStorage.getItem(photoKey())||document.querySelector('.owner-profile-button img,#owner-profile-photo img,.aside-bottom .avatar img')?.src||'';}catch{return '';}};
 async function readSession(){const paths=['/api/guest/profile','/myapp/api/resident/me','/myapp/api/admin/session'];const result=await Promise.allSettled(paths.map(async p=>{const r=await fetch(p,{credentials:'same-origin',cache:'no-store'});return r.ok?await r.json():null;}));account={ready:true,guest:result[0].status==='fulfilled'?result[0].value:null,resident:result[1].status==='fulfilled'?result[1].value:null,admin:result[2].status==='fulfilled'&&result[2].value?.authenticated===true};update();}
 function closeDialogs(){for(const d of document.querySelectorAll('dialog[open]'))d.close();}
 function dialog(id,title){closeDialogs();document.getElementById(id)?.remove();const d=document.createElement('dialog');d.id=id;d.className='lake-account-dialog';d.dir=he()?'rtl':'ltr';const h=document.createElement('h2');h.textContent=title;d.append(h);document.body.append(d);return d;}
