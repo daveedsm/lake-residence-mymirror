@@ -4,7 +4,7 @@ if(window.__lakeUI20261122)return;window.__lakeUI20261122=true;
 const stay=location.pathname.startsWith('/mystay'),name=stay?'MyStay':'MyMirror',key='lake-appearance-'+(stay?'stay':'mirror')+'-v1';
 document.body.classList.add(stay?'lake-stay-app':'lake-mirror-app');
 let mode='auto',installPrompt=null;try{const v=localStorage.getItem(key);if(['auto','day','night'].includes(v))mode=v;}catch{}
-const he=()=>stay?document.querySelector('.guest-app-language')?.textContent.trim()==='EN':document.documentElement.dir==='rtl';
+const he=()=>stay?document.querySelector('.stay-mirror')?.getAttribute('lang')==='he':document.documentElement.dir==='rtl';
 const tr=(en,heb)=>he()?heb:en;
 // NOAA sunset calculation for Tiberias (32.7959 N, 35.5310 E). No location permission.
 function sunset(date){const parts=Object.fromEntries(new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Jerusalem',year:'numeric',month:'2-digit',day:'2-digit'}).formatToParts(date).map(p=>[p.type,p.value]));const y=+parts.year,m=+parts.month,d=+parts.day,n=Math.floor((Date.UTC(y,m-1,d)-Date.UTC(y,0,0))/86400000),rad=Math.PI/180,deg=180/Math.PI,norm=x=>(x%360+360)%360,t=n+(18-35.531/15)/24,M=.9856*t-3.289,L=norm(M+1.916*Math.sin(M*rad)+.020*Math.sin(2*M*rad)+282.634);let RA=norm(Math.atan(.91764*Math.tan(L*rad))*deg);RA+=(Math.floor(L/90)*90-Math.floor(RA/90)*90);RA/=15;const sinD=.39782*Math.sin(L*rad),cosD=Math.cos(Math.asin(sinD)),cosH=(Math.cos(90.833*rad)-sinD*Math.sin(32.7959*rad))/(cosD*Math.cos(32.7959*rad)),H=Math.acos(cosH)*deg/15,utc=((H+RA-.06571*t-6.622-35.531/15)%24+24)%24;return Date.UTC(y,m-1,d)+utc*3600000;}
@@ -96,5 +96,5 @@ html[data-lake-theme=day] .stay-welcome{color:#5a747e!important}.stay-unit{color
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
 `;
 const style=document.createElement('style');style.id='lake-ui-20261122';style.textContent=css;document.head.append(style);
-refresh();new MutationObserver(()=>{if(!queued){queued=true;requestAnimationFrame(()=>{queued=false;refresh();});}}).observe(document.body,{childList:true,subtree:true});setInterval(theme,60000);document.addEventListener('visibilitychange',()=>{if(!document.hidden)theme();});window.addEventListener('pageshow',theme);
+refresh();new MutationObserver(()=>{if(!queued){queued=true;requestAnimationFrame(()=>{queued=false;refresh();});}}).observe(document.body,{childList:true,subtree:true,characterData:true});setInterval(theme,60000);document.addEventListener('visibilitychange',()=>{if(!document.hidden)theme();});window.addEventListener('pageshow',theme);
 })();
