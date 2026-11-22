@@ -112,8 +112,16 @@ html[dir] body .tile b{font-size:15px!important}
 html[dir] body .quickbar .sculpt{width:31px!important;height:31px!important}
 html[dir] body .quickbar .sculpt svg,.stay-shortcuts>button svg{width:29px!important;height:29px!important}
 @media(max-width:650px){html[dir] body .tile b,.stay-service-grid>button{font-size:13px!important}.stay-shortcuts>button,html[dir] body .quickbar .quick{font-size:11px!important}}
+
+/* Keep shell geometry and guest navigation stable when translating. */
+.lake-mirror-app .mm-residence-line{box-sizing:border-box!important;height:36px!important;min-height:36px!important;max-height:36px!important;line-height:20px!important;padding-top:9px!important;padding-bottom:0!important;align-items:center!important}
+.lake-mirror-app .mm-residence-line button{line-height:20px!important}
+.lake-mirror-app #content,.lake-stay-app .guest-app-content{overflow-anchor:none}
+.stay-mirror-hero .stay-unit{inset:18px 18px auto auto!important;text-align:center!important;unicode-bidi:plaintext}
+.guest-app-bottom-nav{direction:rtl!important;flex-direction:row!important}
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
 `;
+document.addEventListener('click',e=>{if(e.target.closest('#language-toggle,.guest-app-language')){const x=window.scrollX,y=window.scrollY;const restore=()=>window.scrollTo({left:x,top:y,behavior:'instant'});queueMicrotask(restore);requestAnimationFrame(restore);}},true);
 const style=document.createElement('style');style.id='lake-ui-20261122';style.textContent=css;document.head.append(style);
 refresh();new MutationObserver(()=>{if(!queued){queued=true;requestAnimationFrame(()=>{queued=false;refresh();});}}).observe(document.body,{childList:true,subtree:true,characterData:true});setInterval(theme,60000);document.addEventListener('visibilitychange',()=>{if(!document.hidden)theme();});window.addEventListener('pageshow',theme);
 })();
