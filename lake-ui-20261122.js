@@ -181,6 +181,8 @@ html[dir] body.lake-mirror-app .quickbar{margin:4px 0 8px!important;padding:5px!
 html[dir] body.lake-mirror-app .controls{margin-top:8px!important}
 html[dir] body.lake-mirror-app .mm-home-grid{margin-top:8px!important}
 @media(max-width:650px){html[dir] body.lake-mirror-app main{padding-top:12px!important}html[dir] body.lake-mirror-app main>header{min-height:54px!important;height:54px!important;margin-bottom:8px!important}}
+html body header .lake-ui-name{position:absolute!important;left:16px!important;top:4px!important;transform:none!important;margin:0!important;z-index:2!important}
+html body header .lake-owner-back{position:absolute!important;left:104px!important;top:1px!important;margin:0!important}
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
 `;
 new MutationObserver(()=>{const c=stay?'lake-stay-app':'lake-mirror-app';if(!document.body.classList.contains(c))document.body.classList.add(c);}).observe(document.body,{attributes:true,attributeFilter:['class']});
