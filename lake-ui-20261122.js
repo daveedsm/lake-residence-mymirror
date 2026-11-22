@@ -142,6 +142,36 @@ header .presentation-menu>summary{width:36px!important;height:36px!important;pad
 .guest-app-language{width:36px!important;min-width:36px!important;height:36px!important;padding:4px!important;border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;color:inherit!important;display:grid!important;place-items:center!important}
 .guest-app-header .lake-account-trigger{height:36px!important;width:36px!important;min-width:36px!important;padding:6px!important}
 @media(max-width:650px){.lake-ui-name{font-size:19px!important}}
+
+/* Stable centered monogram, compact language toggle and account menu. */
+html body header .lake-ui-lockup{left:50%!important;width:90px!important}
+html body header .lake-ui-name{transform:translateY(-11px)!important;letter-spacing:.02em!important}
+html[data-lake-theme] body header .guest-app-language,html[data-lake-theme] body header #language-toggle,html[dir] body header .guest-app-language{background:transparent!important;background-color:transparent!important;border:0!important;box-shadow:none!important;border-radius:0!important;outline-offset:2px;min-width:30px!important;width:30px!important;padding:2px!important;font-size:12px!important}
+.guest-app-header{gap:1px!important}
+html[dir] body .presentation-menu-panel{width:216px!important;min-width:216px!important;max-width:calc(100vw - 32px)!important}
+html[dir] body [data-slot=popover-content]:has(#lake-ui-tools){width:216px!important;max-width:calc(100vw - 32px)!important;gap:6px!important;padding:10px!important}
+html[dir] body #lake-ui-tools{grid-template-columns:repeat(5,30px)!important;gap:5px!important;padding:10px 0 0!important;margin:8px 0 0!important;justify-content:end!important}
+html[dir] body #lake-ui-tools button{width:30px!important;min-width:30px!important;height:30px!important;min-height:30px!important;padding:5px!important}
+html[dir] body #lake-ui-tools svg{width:19px!important;height:19px!important}
+.lake-stay-app .guest-app-content{gap:8px!important;padding-top:8px!important}.lake-stay-app .stay-shortcuts{margin:0!important}.lake-stay-app .stay-welcome{display:none!important}
+#lake-account-tools{display:grid;gap:5px;padding-bottom:8px;border-bottom:1px solid var(--line,#42697724)}
+#lake-account-tools button{width:100%!important;min-height:34px!important;height:auto!important;text-align:start!important;justify-content:flex-start!important;display:block!important;padding:7px 8px!important;font-size:14px!important;background:transparent!important;color:inherit!important;border:0!important;border-radius:6px!important}
+.lake-account-role{font-size:11px;color:var(--muted,#60778b);padding:3px 8px}
+.lake-stay-app[data-lake-owner="0"] a[href^="/myapp"],.lake-stay-app[data-lake-owner="0"] [data-href="/myapp"],.lake-stay-app[data-lake-owner="0"] [data-href="/crm"]{display:none!important}
+.lake-owner-back{display:grid;place-items:center;width:25px;height:30px;color:inherit;order:-9;margin-inline-start:-5px;margin-inline-end:auto;flex:none}.lake-owner-back svg{width:22px;height:22px}
+.lake-stay-app .lake-ui-name{margin-right:0!important}
+.profile-plus,.owner-profile-plus,.mm-profile-card .owner-profile-button .profile-plus,#owner-profile-photo .profile-plus{display:none!important}
+html[dir] body .mm-profile-card .owner-profile-button,html[dir] body #owner-profile-photo{width:76px!important;height:76px!important;flex-basis:76px!important;border:0!important;box-shadow:none!important;background:transparent!important}
+.owner-profile-button img,#owner-profile-photo img{width:100%;height:100%;object-fit:cover;border-radius:50%}
+.lake-account-dialog{width:min(430px,calc(100vw - 24px));max-height:90dvh;overflow:auto;padding:24px;border:1px solid var(--line,#42697724);border-radius:16px;background:var(--panel,#f0f2ed);color:var(--text,#203d49);box-shadow:0 15px 60px #0004}
+.lake-account-dialog::backdrop{background:#06172299}.lake-account-dialog h2{font-size:21px;margin:0 0 15px;line-height:1.4}
+.lake-account-dialog p{font-size:13px;color:inherit;line-height:1.6}.lake-account-dialog button,.lake-account-dialog a.lake-account-primary{padding:10px 13px;border:1px solid var(--line,#42697724);border-radius:8px;background:transparent;color:inherit;font:inherit;cursor:pointer;display:inline-block;text-decoration:none;margin:4px}
+.lake-account-dialog .lake-account-primary{background:var(--panel2,#dae5e5)!important;font-weight:600}
+.lake-account-tabs{display:flex;gap:4px;flex-wrap:wrap}.lake-account-tabs button{font-size:12px;padding:8px;margin:0}
+.lake-account-form label{display:grid;gap:6px;margin:14px 0;font-size:13px}.lake-account-form input{width:100%;background:var(--bg,#e4ebea);color:inherit;padding:12px;border:1px solid var(--line,#42697724);border-radius:8px}
+.lake-photo-canvas{display:block;width:min(100%,300px);height:auto;aspect-ratio:1;border-radius:50%;margin:16px auto;touch-action:none;cursor:grab;background:#dae5e5}.lake-photo-canvas:active{cursor:grabbing}
+.lake-photo-tools{display:flex;gap:10px}.lake-file-button{position:relative;overflow:hidden;padding:10px 14px;border:1px solid var(--line,#42697724);border-radius:8px;font-size:13px;cursor:pointer;margin:0}.lake-file-button input{position:absolute;inset:0;opacity:0;width:100%;height:100%;cursor:pointer}
+.lake-account-dialog input[type=range]{width:100%;padding:0;margin:8px 0}.lake-account-dialog label:has(input[type=range]){display:block;font-size:12px;margin:10px 0}.lake-account-dialog small{display:block;font-size:11px;margin-top:10px;color:var(--muted,#60778b)}
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
 `;
 document.addEventListener('click',e=>{if(e.target.closest('#language-toggle,.guest-app-language')){const x=window.scrollX,y=window.scrollY;const restore=()=>window.scrollTo({left:x,top:y,behavior:'instant'});queueMicrotask(restore);requestAnimationFrame(restore);}},true);
