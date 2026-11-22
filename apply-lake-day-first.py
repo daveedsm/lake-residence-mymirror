@@ -18,6 +18,6 @@ shutil.copy('/opt/lake-first-paint.html','/opt/mystay-presentation/lake-first-pa
 if 'lake-first-paint.html' not in server:
     anchor = 'let html=await upstream.text();'
     if anchor not in server: raise RuntimeError('Server injection anchor missing')
-    inject = \"html=html.replace(/<head([^>]*)>/i,'<head$1>'+fs.readFileSync(path.join(root,'lake-first-paint.html'),'utf8'));\"
+    inject = "html=html.replace(/<head([^>]*)>/i,'<head$1>'+fs.readFileSync(path.join(root,'lake-first-paint.html'),'utf8'));"
     server_path.write_text(server.replace(anchor,anchor+inject))
 print('Day-first source prepared; original server backed up')
